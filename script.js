@@ -98,13 +98,21 @@ function makeItemTemplate(item) {
     newItem.querySelector('p').textContent = item.description;
     newItem.querySelector('img').src = item.img;
     newItem.querySelector('.price').textContent = `${item.price}P`;
-    newItem.querySelector('.tags').textContent = item.tags;
+
+    const tagsContainer = newItem.querySelector('.tags');
+
+    item.tags.forEach(function(tag) {
+        const tagItem = document.createElement('span');
+        tagItem.textContent = tag;
+        tagItem.classList.add('tag');
+        tagsContainer.append(tagItem);
+    });
 
     return newItem;
 }
 
 function itemsOnPage(item) {
-    shopItems.prepend(makeItemTemplate(item));
+    shopItems.append(makeItemTemplate(item));
 }
 
 function clickOnMe() {
